@@ -1,42 +1,41 @@
-# Source for O'Reilly's Learning TensorFlow.js Book
+# Actividad: Modelos de IA en JavaScript con TensorFlow.js
 
-Learning TensorFlow.js - Powerful Machine Learning in JavaScript by Gant Laborde
+**Alumno:** Duarte Natanael Obed
 
-![book cover](./_art/book_medium.jpg)
+Esta actividad consiste en utilizar el **Modelo de Toxicidad** y el **Modelo Alerta Camión** en JavaScript, a partir del código del Capítulo 2 del libro *Learning TensorFlow.js* (Gant Laborde, O'Reilly).
 
-### About the Book
+Todos los proyectos usan **TensorFlow.js** cargado desde un CDN, por lo que no requieren instalación con npm: son páginas HTML que se ejecutan directamente en el navegador.
 
-Learn how to take advantage of the TensorFlow.js framework to implement machine learning models in the client browser or server.
+## Cómo ejecutar los proyectos
 
-#### This book is intended for two audiences:
+Conviene levantar un servidor local (abrir el HTML con doble clic puede bloquear la descarga de los modelos):
 
-- Web devs and Front end Engineers who are familiar with JavaScript but unfamiliar with how to get started in AI / ML.
-- Experienced AI specialists who are interested in how to apply their server-based skills to a framework like TensorFlow.js.
+```bash
+cd chapter2/simple
+python -m http.server 8000
+```
 
-Purchase your copy of the book on Amazon: https://amzn.to/3dR3vpY
+Luego abrir cada proyecto en el navegador y revisar la consola con `F12` → pestaña *Console*.
 
-### About the Code
+## Proyectos
 
-The code in this repository is broken down by chapter. Each chapter folder has a technical domain split. Some code is repeated in each folder for each technology.
+Los proyectos están en la carpeta [`chapter2/simple`](chapter2/simple):
 
-The folders in each chapter could be:
+### 1. `simplest-example` — Ejemplo más simple
+[Ver código](chapter2/simple/simplest-example/index.html) · http://localhost:8000/simplest-example/
 
-- `extra` - any extra content for that chapter that is not technically specific.
-- `node` - A Node.js set of solutions and code for the given chapter that run as a server.
-- `simple` - A "inline" hosted set of HTML solutions in code for a given chapter that run in the browser. These files do not depend on a package management system for hosting. These files access their dependencies via CDNs.
-- `web` - A Parcel.js web hosted solution of code that runs using NPM to create a browser based solution. These projects reflect modern transpiled web technology.
+Es el "Hola Mundo" de TensorFlow.js: solo carga la librería e imprime en consola la versión de TensorFlow.js que se está usando. Sirve para verificar que la librería se cargó correctamente.
 
-### Book Chapters
+### 2. `simple-toxicity` — Modelo de Toxicidad
+[Ver código](chapter2/simple/simple-toxicity/index.html) · http://localhost:8000/simple-toxicity/
 
-- [**Chapter 1** _AI is Magic_](https://github.com/GantMan/learn-tfjs/tree/master/chapter1) - There is no code associated with Chapter 1 because it's an introduction to the book and concepts.  I've added a small readme with some of the links mentioned in the chapter for convenience.
-- [**Chapter 2** _Introducing TensorFlow.js_](https://github.com/GantMan/learn-tfjs/tree/master/chapter2) - This chapter is focused on getting you running TensorFlow.js on a client or a server. Once you've got it running, you actually run a Toxicity classifier on given text.
-- [**Chapter 3** _Introducing Tensors_](https://github.com/GantMan/learn-tfjs/tree/master/chapter3) - This chapter helps you understand the concept and need of tensors. You then immediately use this technology to build a simple recommendation system for music.
-- [**Chapter 4** _Image Tensors_](https://github.com/GantMan/learn-tfjs/tree/master/chapter4) - Images in machine learning are a fantastic example of tensors and all the things you can do to modify complex data.
-- [**Chapter 5** _Introducing Models_](https://github.com/GantMan/learn-tfjs/tree/master/chapter5) - Learn what makes an AI tick. Machine learning models are the core of what drives machine learning. In this chapter, you implement several models.
-- [**Chapter 6** _Advanced Models & UI_](https://github.com/GantMan/learn-tfjs/tree/master/chapter6) - In this chapter, you implement a very advanced model that detects objects, you then do an overlay that helps illustrate the results, and you connect everything to the webcam for real-time inference.
-- [**Chapter 7** _Model Making Resources_](https://github.com/GantMan/learn-tfjs/tree/master/chapter7) - Now that you understand how to implement models, where do they come from? This chapter gives you a tour of conversion commands and data resources.
-- [**Chapter 8** _Training Models_](https://github.com/GantMan/learn-tfjs/tree/master/chapter8) - Train your first model from data. See the simplest model architecture for the simplest problem. You train directly in the browser!
-- [**Chapter 9** _Classification Models & Data Analysis_](https://github.com/GantMan/learn-tfjs/tree/master/chapter9) - Data isn't always clean. Learn how to build a notebook, visualize, and extract features from your data by solving who would survive the Titanic.
-- [**Chapter 10** _Image Training_](https://github.com/GantMan/learn-tfjs/tree/master/chapter10) - Bring in some advanced concepts for feature extraction via convolutions. Understand and learn how to build more advanced models on Node.js and implement those models in the browser.
-- [**Chapter 11** _Transfer Learning_](https://github.com/GantMan/learn-tfjs/tree/master/chapter11) - Learn what transfer learning is and utilize it. Transfer learn with several methods and see the benefit with small datasets.
-- [**Chapter 12** _Dicify - Capstone Project_](https://github.com/GantMan/learn-tfjs/tree/master/chapter12) - Utilize all the skills you've learned. Compose a dataset and train a model to create art out of dice.
+Usa el modelo **Toxicity** para analizar texto y detectar contenido tóxico u ofensivo. Clasifica tres frases de ejemplo (`'You are a poopy head!'`, `'I like turtles'`, `'Shut up!'`) y muestra en la consola, para cada categoría (insulto, amenaza, obscenidad, etc.), si el resultado supera el umbral de confianza definido (`0.5`).
+
+### 3. `chapter-challenge` — Modelo Alerta Camión
+[Ver código](chapter2/simple/chapter-challenge/index.html) · http://localhost:8000/chapter-challenge/
+
+Usa el modelo **MobileNet** para clasificar una imagen (`truck.jpg`). Recorre las predicciones y, si detecta que la imagen contiene un camión (`"truck"`), muestra una alerta `"TRUCK DETECTED!"`. Las predicciones completas se imprimen en la consola.
+
+---
+
+*Basado en el repositorio [learn-tfjs](https://github.com/GantMan/learn-tfjs) de Gant Laborde.*
